@@ -1,0 +1,48 @@
+version: '3.8'
+services:
+  api-gateway:
+    image: my-api-gateway
+    ports:
+      - "5000:5000"
+    networks:
+      - backend
+
+  auth:
+    image: my-auth-service
+    # Remove direct port exposure for security
+    # ports:
+    #   - "5001:5001"
+    networks:
+      - backend
+
+  confined-space:
+    image: my-confined-service
+    # Remove direct port exposure for security
+    # ports:
+    #   - "5002:5002"
+    networks:
+      - backend
+
+  location-service:
+    image: my-location-service
+    # Remove direct port exposure for security
+    # ports:
+    #   - "5003:5003"
+    networks:
+      - backend
+
+  client:
+    image: my-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - api-gateway
+      - auth
+      - confined-space
+      - location-service
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge 
