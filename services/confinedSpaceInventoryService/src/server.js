@@ -8,7 +8,11 @@ const path = require('path');
 const fs = require('fs');
 
 // Load .env file from current directory
-dotenv.config({ path: path.join(__dirname, '.env') });
+try {
+    dotenv.config({ path: path.join(__dirname, '.env') });
+} catch (error) {
+    console.log('No .env file found, using environment variables');
+}
 
 // Debug log to verify
 console.log('MONGO_URI:', process.env.MONGO_URI);

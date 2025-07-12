@@ -4,7 +4,6 @@ FROM node:20-alpine
 # Set working directory
 WORKDIR /app
 
-COPY .env /app/.env 
 # Copy package.json and package-lock.json
 COPY package*.json ./
 

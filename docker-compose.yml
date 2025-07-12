@@ -1,38 +1,30 @@
 version: '3.8'
+
 services:
   api-gateway:
-    image: my-api-gateway
+    image: afsapp.azurecr.io/test-api:v1
     ports:
       - "5000:5000"
     networks:
       - backend
 
   auth:
-    image: my-auth-service
-    # Remove direct port exposure for security
-    # ports:
-    #   - "5001:5001"
+    image: afsapp.azurecr.io/test-auth:v1
     networks:
       - backend
 
   confined-space:
-    image: my-confined-service
-    # Remove direct port exposure for security
-    # ports:
-    #   - "5002:5002"
+    image: afsapp.azurecr.io/test-confi:v1
     networks:
       - backend
 
   location-service:
-    image: my-location-service
-    # Remove direct port exposure for security
-    # ports:
-    #   - "5003:5003"
+    image: afsapp.azurecr.io/test-loca:v1
     networks:
       - backend
 
   client:
-    image: my-frontend
+    image: afsapp.azurecr.io/test-front:v1
     ports:
       - "8080:80"
     depends_on:
@@ -45,4 +37,4 @@ services:
 
 networks:
   backend:
-    driver: bridge 
+    driver: bridge
